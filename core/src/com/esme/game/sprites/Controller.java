@@ -27,10 +27,13 @@ public class Controller {
         stage = new Stage(viewport, LaunchGame.sb);
         Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        table.setFillParent(true);
-        table.bottom().right();
-        //table.left().bottom();
+        Table tableLeft = new Table();
+        tableLeft.setFillParent(true);
+        tableLeft.left().bottom();
+
+        Table tableRight = new Table();
+        tableRight.setFillParent(true);
+        tableRight.bottom().right();
 
         Image upImg = new Image(new Texture(Gdx.files.internal("up.png")));
         upImg.setSize(100,100);
@@ -75,18 +78,21 @@ public class Controller {
             }
         });
 
-        table.add(); //empty table case (tiktactoe)
-        table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
-        table.add();
-        table.row().pad(5,5,5,5);
-        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight());
-        table.add();
-        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
-        table.row().padBottom(5);
-        table.add();
-        table.add(); //pas de bouton down
-        table.add();
-        stage.addActor(table);
+        tableLeft.padLeft(20);
+        tableLeft.add(upImg).size(upImg.getWidth(), upImg.getHeight());
+        tableLeft.row().pad(5,5,5,5);
+        tableLeft.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight());
+        tableLeft.add().width(50);
+        tableLeft.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
+        tableLeft.padBottom(25);
+
+        tableRight.padRight(20);
+        tableRight.add(upImg).size(upImg.getWidth(), upImg.getHeight());
+        tableRight.padBottom(25);
+
+
+        stage.addActor(tableLeft);
+        stage.addActor(tableRight);
     }
     public void draw(){
         stage.draw();
