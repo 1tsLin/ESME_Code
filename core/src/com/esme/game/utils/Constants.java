@@ -8,7 +8,7 @@ public class Constants {
     public final static String GAME_TITLE = "ESME";
 
     public final static int GRAVITY = -35;
-    public final static int CHAR_SPEED=8;
+    public static int CHAR_SPEED=8;
 
     public final static int PLATEFORM_COUNT=4;
 }
