@@ -37,7 +37,7 @@ public class PlayState extends GameState{
         this.ground = new Texture(Gdx.files.internal("bg_ground.png"));
 
         this.controller = new Controller();
-        this.monster1= new Monster(500,300);
+        this.monster1= new Monster(1000,200);
 
         this.monster2 = new Monster(2000,400);
         this.character = new Character(Constants.VIEWPORT_WIDTH/2-128/2, this.ground.getHeight(),this.controller);
@@ -61,8 +61,6 @@ public class PlayState extends GameState{
 
     @Override
     protected void handleInput() {
-
-        //System.out.println("test"+Math.abs(this.character.getPosition().x - this.monster.getPosition().x));
         isradius();
         if(controller.isRightPressed()){
             this.character.moveRight();
@@ -88,33 +86,27 @@ public class PlayState extends GameState{
 
     }
     public void isradius(){
-        System.out.println("position distance"+Math.abs(this.character.getPosition().x - this.monster2.getPosition().x));
-if(Math.abs(this.character.getPosition().x - this.monster1.getPosition().x) <200 && Math.abs(this.character.getPosition().y - this.monster1.getPosition().y ) <200 ){
+if(Math.abs(this.character.getPosition().x - this.monster1.getPosition().x) <150 && Math.abs(this.character.getPosition().y - this.monster1.getPosition().y ) <150 ){
     Constants.CHAR_SPEED= 4;
     this.resetspeed();
-    System.out.println("slowed");
-} else if (Math.abs(this.character.getPosition().x - this.monster2.getPosition().x) <200 && Math.abs(this.character.getPosition().y - this.monster2.getPosition().y) <200) {
+} else if (Math.abs(this.character.getPosition().x - this.monster2.getPosition().x) <150 && Math.abs(this.character.getPosition().y - this.monster2.getPosition().y) <150) {
     Constants.CHAR_SPEED= 4;
     this.resetspeed();
-    System.out.println("slowed");
 }
-
     }
     public void resetspeed(){
-        System.out.println("reset speed");
         Thread backgroundspeed = new Thread( new Runnable() {
             @Override
             public void run(){
                 try {
-                    Thread.sleep(6000);
+                    Thread.sleep(4000);
                     Constants.CHAR_SPEED = 8;
                 } catch (InterruptedException ie) {
-                    System.out.println("execption"+ie);
+                    System.out.println("exception"+ie);
                 }
             }});
 
         backgroundspeed.start();
-        System.out.println("speed back to normal");
     }
 
     @Override
@@ -128,7 +120,7 @@ if(Math.abs(this.character.getPosition().x - this.monster1.getPosition().x) <200
         sb.setProjectionMatrix(this.cam.combined);
         sb.begin();
         sb.draw(this.background,0,0);
-        sb.draw(this.monster1.getTexture(),500,300);
+        sb.draw(this.monster1.getTexture(),1000,200);
         sb.draw(this.monster2.getTexture(),2000,400);
         sb.draw(this.ground,0,0);
         for(Plateform plateform : this.platforms){
