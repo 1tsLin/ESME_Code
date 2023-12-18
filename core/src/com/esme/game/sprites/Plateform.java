@@ -13,10 +13,8 @@ public class Plateform {
     private Texture texture;
     private Vector2 position;
 
-    //dans notre cas il faudrait dessiner une map entière avec différentes plateformes -> une classe par map ?
-    public Plateform(float x, float y){
-
-        this.texture=new Texture(Gdx.files.internal("plateform.png"));
+    public Plateform(float x, float y, String file){
+        this.texture=new Texture(Gdx.files.internal(file));
         this.position = new Vector2(x,y);
     }
 

@@ -13,10 +13,8 @@ public class Animation {
         this.frameCount = frameCount;
         this.textures = new Array<Texture>();
         for (int i=1; i<=this.frameCount; i++){
-
             //this.textures.add(new Texture("character/BaseChara.png"));
             this.textures.add(new Texture(Gdx.files.internal("data/character/Walking/"+Integer.toString(i)+".png")));
-            //il faut faire un dossier avec les animations de marche !!
         }
         this.maxFrameTime = cycleTime/this.frameCount;
         this.frame=0; //indice de la texture dans le tableau

@@ -1,6 +1,7 @@
 package com.esme.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,13 +19,14 @@ import javax.tools.JavaFileManager;
 
 import jdk.tools.jlink.internal.Platform;
 
+
 public class PlayState extends GameState{
 
     private Texture background, ground;
     private Character character;
     private Monster monster1, monster2;
     private Plateform plateform1, plateform2, plateform3, plateform4, plateform5;
-    private Array<Plateform> platforms; //liste contenant des plateformes
+    private Array<Plateform> platforms;
 
     private boolean backwards = false;
     Controller controller;
@@ -40,11 +42,11 @@ public class PlayState extends GameState{
         this.monster2 = new Monster(2000,400);
         this.character = new Character(Constants.VIEWPORT_WIDTH/2-128/2, this.ground.getHeight(),this.controller);
 
-        this.plateform1 = new Plateform(Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/3);
-        this.plateform2 = new Plateform(Constants.VIEWPORT_WIDTH/2+450, Constants.VIEWPORT_HEIGHT/3+135);
-        this.plateform3 = new Plateform(Constants.VIEWPORT_WIDTH/2+1800+450, Constants.VIEWPORT_HEIGHT/3);
-        this.plateform4 = new Plateform(Constants.VIEWPORT_WIDTH/2+1800, Constants.VIEWPORT_HEIGHT/3+135);
-        this.plateform5 =  new Plateform(Constants.VIEWPORT_WIDTH/2+1800-450, Constants.VIEWPORT_HEIGHT/3+135);
+        this.plateform1 = new Plateform(Constants.VIEWPORT_WIDTH/2, Constants.VIEWPORT_HEIGHT/3, "plateform.png");
+        this.plateform2 = new Plateform(Constants.VIEWPORT_WIDTH/2+450, Constants.VIEWPORT_HEIGHT/3+135, "plateform.png");
+        this.plateform3 = new Plateform(Constants.VIEWPORT_WIDTH/2+1800+450, Constants.VIEWPORT_HEIGHT/3, "plateform.png");
+        this.plateform4 = new Plateform(Constants.VIEWPORT_WIDTH/2+1800, Constants.VIEWPORT_HEIGHT/3+135, "plateform.png");
+        this.plateform5 =  new Plateform(Constants.VIEWPORT_WIDTH/2+1800-450, Constants.VIEWPORT_HEIGHT/3+135, "plateform.png");
 
         this.platforms = new Array<>();
         this.platforms.add(this.plateform1);
@@ -63,28 +65,25 @@ public class PlayState extends GameState{
         //System.out.println("test"+Math.abs(this.character.getPosition().x - this.monster.getPosition().x));
         isradius();
         if(controller.isRightPressed()){
-            //Gdx.input.isKeyPressed(Input.Keys.RIGHT)
             this.character.moveRight();
             this.backwards=false;
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
-            this.isradius();
         }
         if(controller.isLeftPressed()){
-            //Gdx.input.isKeyPressed(Input.Keys.LEFT)
             this.character.moveLeft();
             this.backwards=true;
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
-            this.isradius();
         }
-
         if(controller.isUpPressed()){
-            //Gdx.input.isKeyJustPressed(Input.Keys.SPACE)
+            Gdx.app.log("Position", String.valueOf(this.character.getPosition().x)+" et "+ String.valueOf(this.character.getPosition().y));
             this.character.jump();
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
-            this.isradius();
+            if(1556.0<this.character.getPosition().x && this.character.getPosition().x<1756.0 && this.character.getPosition().y>(Constants.GROUND_HEIGHT+50)){
+                this.gsm.set(new LevelOne(this.gsm));
+            }
         }
 
     }
@@ -126,7 +125,6 @@ if(Math.abs(this.character.getPosition().x - this.monster1.getPosition().x) <200
 
     @Override
     public void render(SpriteBatch sb) {
-
         sb.setProjectionMatrix(this.cam.combined);
         sb.begin();
         sb.draw(this.background,0,0);
@@ -138,11 +136,8 @@ if(Math.abs(this.character.getPosition().x - this.monster1.getPosition().x) <200
         }
         sb.draw(this.character.getTexture(), this.backwards?this.character.getPosition().x+this.character.getTexture().getWidth():this.character.getPosition().x, this.character.getPosition().y,this.backwards?-this.character.getTexture().getWidth():this.character.getTexture().getWidth(),this.character.getTexture().getHeight());
         //? fonctionne comme une condition if - traitement condition remplie : else condition non remplie
-
-
         sb.end();
         controller.draw();
-
     }
 
     @Override

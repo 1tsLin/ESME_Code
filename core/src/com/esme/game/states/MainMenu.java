@@ -89,7 +89,7 @@ public class MainMenu extends GameState {
     public void dispose() {
         this.background.dispose();
         this.ground.dispose();
-       this.character.dispose();
+        this.character.dispose();
         this.gameTitleText.dispose();
         this.touchText.dispose();
         this.toText.dispose();

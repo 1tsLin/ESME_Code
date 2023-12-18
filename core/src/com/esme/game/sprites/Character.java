@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.esme.game.utils.Constants;
+import com.esme.game.utils.Constants;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.naming.ldap.Control;
@@ -22,7 +23,7 @@ public class Character {
         this.texture = new Texture(Gdx.files.internal("data/character/basechara.png"));
         this.position = new Vector2(x,y);
         this.fall = new Vector2(0,0);
-        this.walking = new Animation(8,0.8f); //on a pas les différentes animations du sprite :eyes:
+        this.walking = new Animation(8,0.8f);
     }
 
     public void update(float dt, Array<Plateform> platforms){
@@ -31,8 +32,8 @@ public class Character {
         this.position.add(this.fall);
         this.fall.scl(1/dt); //remet les bonnes coordonnées
 
-        if(this.position.y <181){ //pour qu'il soit sur le sol
-            this.position.y=181;
+        if(this.position.y <Constants.GROUND_HEIGHT){
+            this.position.y=Constants.GROUND_HEIGHT;
             this.fall.y=0;
         }
 
@@ -40,14 +41,13 @@ public class Character {
             this.position.x=0;
         }
 
-        if(value !=181 && this.position.y <=value){ //pour qu'il soit sur la plateforme
+        if(value !=181 && this.position.y <=value){
             this.position.y=value;
             this.fall.y=0;
         }
-        if(this.position.x>3840-this.texture.getWidth()){
-            this.position.x=3840-this.texture.getWidth();
+        if(this.position.x>Constants.LEVEL_MAX_WIDTH-this.texture.getWidth()){
+            this.position.x=Constants.LEVEL_MAX_WIDTH-this.texture.getWidth();
         }
-
         for(Plateform plateform : platforms){
             collisionDetected = false;
             if((this.position.x+128/2 > plateform.getPosition().x-128/4 && this.position.x< plateform.getRightX()-128/3) &&
@@ -62,19 +62,13 @@ public class Character {
         if (collisionDetected==false) {
             value=181;
         }
-
-        if(!this.controller.isLeftPressed() && !this.controller.isRightPressed() && this.fall.y==0){
-            //!Gdx.input.isKeyPressed(Input.Keys.LEFT)&& !Gdx.input.isKeyPressed(Input.Keys.RIGHT)
-            //si le personnage ne bouge pas, on lui remet sa texture de base
+        if((!this.controller.isLeftPressed() && !this.controller.isRightPressed() && this.fall.y==0)){
             this.texture = new Texture(Gdx.files.internal("data/character/basechara.png"));
         }
         if(this.fall.y>0){
-            //si le perso monte = saute
             this.texture=new Texture(Gdx.files.internal("data/character/Jump.png"));
         }
-
         if(this.fall.y<0){
-            //si le perso chute
             this.texture=new Texture(Gdx.files.internal("data/character/Fall.png"));
         }
     }
