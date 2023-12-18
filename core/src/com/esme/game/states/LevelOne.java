@@ -65,7 +65,7 @@ public class LevelOne extends GameState{
             this.keyTexture.dispose();
         }
         if(this.exitDoorPosition.x-150f/2<this.character.getPosition().x && this.character.getPosition().x<exitDoorPosition.x+150f/2 && this.hasKey==true){
-            System.out.println("Fini !!");
+            this.gsm.set(new EndMenu(this.gsm));
             NameUpdate listener = new NameUpdate();
             Gdx.input.getTextInput(listener, "Veuillez entrer un pseudo", "", "Pseudo");
         }

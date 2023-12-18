@@ -82,10 +82,7 @@ public class PlayState extends GameState{
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
             if(1556.0<this.character.getPosition().x && this.character.getPosition().x<1756.0 && this.character.getPosition().y>(Constants.GROUND_HEIGHT+20)){
-                //this.gsm.set(new LevelOne(this.gsm));
-                this.gsm.set(new EndMenu(this.gsm));
-                NameUpdate listener = new NameUpdate();
-                Gdx.input.getTextInput(listener, "Veuillez entrer un pseudo", "", "Pseudo");
+                this.gsm.set(new LevelOne(this.gsm));
             }
         }
 
