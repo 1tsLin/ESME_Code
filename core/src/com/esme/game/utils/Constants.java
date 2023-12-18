@@ -9,7 +9,7 @@ public class Constants {
     public final static String GAME_TITLE = "ESMEscape";
 
     public final static int GRAVITY = -35;
-    public final static int CHAR_SPEED=12;
+    public static int CHAR_SPEED=12;
     public static int LEVEL_MAX_WIDTH = 3840;
     public final static int PLATEFORM_COUNT=4;
 }
