@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.esme.game.NameUpdate;
 import com.esme.game.managers.GameStateManager;
 import com.esme.game.sprites.Controller;
 import com.esme.game.sprites.Monster;
@@ -79,8 +80,11 @@ public class PlayState extends GameState{
             this.character.jump();
             this.cam.position.set((this.character.getPosition().x + this.character.getTexture().getWidth() / 2), Constants.VIEWPORT_HEIGHT/2, 0);
             this.cam.update();
-            if(1556.0<this.character.getPosition().x && this.character.getPosition().x<1756.0 && this.character.getPosition().y>(Constants.GROUND_HEIGHT+50)){
-                this.gsm.set(new LevelOne(this.gsm));
+            if(1556.0<this.character.getPosition().x && this.character.getPosition().x<1756.0 && this.character.getPosition().y>(Constants.GROUND_HEIGHT+20)){
+                //this.gsm.set(new LevelOne(this.gsm));
+                this.gsm.set(new EndMenu(this.gsm));
+                NameUpdate listener = new NameUpdate();
+                Gdx.input.getTextInput(listener, "Veuillez entrer un pseudo", "", "Pseudo");
             }
         }
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.esme.game.NameUpdate;
 import com.esme.game.managers.GameStateManager;
 import com.esme.game.sprites.Character;
 import com.esme.game.sprites.Controller;
@@ -65,6 +66,8 @@ public class LevelOne extends GameState{
         }
         if(this.exitDoorPosition.x-150f/2<this.character.getPosition().x && this.character.getPosition().x<exitDoorPosition.x+150f/2 && this.hasKey==true){
             System.out.println("Fini !!");
+            NameUpdate listener = new NameUpdate();
+            Gdx.input.getTextInput(listener, "Veuillez entrer un pseudo", "", "Pseudo");
         }
         if(controller.isRightPressed()){
             this.character.moveRight();
