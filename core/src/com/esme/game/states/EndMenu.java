@@ -9,8 +9,6 @@ import com.esme.game.managers.GameStateManager;
 public class EndMenu extends GameState {
 
     private final Texture background;
-    private TextField nameField;
-    private TextButton submitButton;
 
     public EndMenu(GameStateManager gsm) {
         super(gsm);

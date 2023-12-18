@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.esme.game.NameUpdate;
+import com.esme.game.Score;
 import com.esme.game.managers.GameStateManager;
 import com.esme.game.sprites.Controller;
 import com.esme.game.sprites.Monster;
